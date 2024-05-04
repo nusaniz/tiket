@@ -44,14 +44,37 @@ $conn->close();
 </head>
 <body>
     <h2>Penjualan Tiket</h2>
-    <?php
+
+<?php
 // Memeriksa apakah parameter "tiket" telah ditetapkan dalam URL
-if (isset($_GET['tiket'])) {
-    $ticket_code = $_GET['tiket'];
-    // Menampilkan pesan HTML jika parameter "tiket" ada dalam URL
-    echo "<p>Kode tiket Anda: $ticket_code</p>";
-}
-?>
+// if (isset($_GET['tiket'])) {
+//     $ticket_code = $_GET['tiket'];
+//     // Menampilkan pesan HTML jika parameter "tiket" ada dalam URL
+//     echo "<p>Kode tiket Anda: $ticket_code</p>";
+// }
+// ?>
+
+<?php if (isset($_GET['tiket'])): ?>
+        <?php $ticket_code = $_GET['tiket'];?>
+        <!-- Tambahkan tombol "Salin Kode Tiket" -->
+        <div class="d-flex alert alert-success" role="alert">
+            <p style="margin: 0 10px 0 0;" >Kode tiket Anda: <?php echo $ticket_code; ?></p>
+            <button class="btn btn-primary btn-sm" onclick="copyToClipboard('<?php echo $ticket_code; ?>')">Salin Kode Tiket</button>
+        </div>
+    <?php endif; ?>
+
+    <!-- Script JavaScript untuk menyalin kode tiket ke clipboard -->
+    <script>
+        function copyToClipboard(text) {
+            var textField = document.createElement('textarea');
+            textField.innerText = text;
+            document.body.appendChild(textField);
+            textField.select();
+            document.execCommand('copy');
+            textField.remove();
+            alert('Kode tiket berhasil disalin!');
+        }
+    </script>
 
     <?php if ($available_tickets > 0): ?>
         <form method="POST" action="sale_ticket.php">
