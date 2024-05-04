@@ -48,10 +48,10 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
 // Mengirim email konfirmasi pembelian tiket
-sendEmail($name, $ticket_code);
+sendEmail($name,$seat, $ticket_code);
 
 // Fungsi untuk mengirim email
-function sendEmail($name, $ticket_code) {
+function sendEmail($name, $seat, $ticket_code) {
     // Load library PHPMailer
     require '../PHPMailer/PHPMailer/PHPMailer.php';
     require '../PHPMailer/PHPMailer/SMTP.php';
@@ -77,7 +77,7 @@ function sendEmail($name, $ticket_code) {
     // Konten email
     $mail->isHTML(true);
     $mail->Subject = "Konfirmasi Pembelian Tiket $name";
-    $mail->Body    = "Halo $name,<br><br>Terima kasih telah membeli tiket. Berikut adalah kode tiket Anda: $ticket_code. Simpan kode ini dengan baik untuk verifikasi.<br><br>Terima kasih,<br>Your Company";
+    $mail->Body    = "Halo $name $seat,<br><br>Terima kasih telah membeli tiket. Berikut adalah kode tiket Anda: $ticket_code. Simpan kode ini dengan baik untuk verifikasi.<br><br>Terima kasih,<br>Your Company";
 
     // Kirim email
     if(!$mail->send()) {
