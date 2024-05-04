@@ -70,7 +70,7 @@ if (!isset($_SESSION['username'])) {
 <div class="content">
     <?php
     // Mengecek apakah parameter page telah diberikan dan valid
-    if (isset($_GET['page']) && in_array($_GET['page'], ['admin','add','quota','sale','mail', 'cek'])) {
+    if (isset($_GET['page']) && in_array($_GET['page'], ['admin','add','quota','edit_booking','sale','mail', 'cek'])) {
         $page = $_GET['page'];
         include "$page.php"; // Menampilkan halaman yang sesuai dengan parameter page
     } else {
