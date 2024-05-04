@@ -86,6 +86,10 @@ $conn->close();
                 <label for="seat">Kursi:</label>
                 <input type="text" class="form-control" id="seat" name="seat" required>
             </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="text" class="form-control" id="email" name="email" required>
+            </div>
             <button type="submit" class="btn btn-primary">Beli Tiket</button>
         </form>
         <p>Kuota tiket: <?php echo $quota; ?></p>

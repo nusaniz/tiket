@@ -13,12 +13,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Ambil data dari formulir
     $name = $_POST['name'];
     $seat = $_POST['seat'];
+    $email = $_POST['email'];
 
     // Generate ticket_code secara otomatis
     $ticket_code = generateTicketCode();
 
     // Insert data baru ke dalam tabel
-    $sql = "INSERT INTO halo (ticket_code, name, seat) VALUES ('$ticket_code', '$name', '$seat')";
+    $sql = "INSERT INTO halo (ticket_code, name, seat, email) VALUES ('$ticket_code', '$name', '$seat', '$email')";
     if (mysqli_query($conn, $sql)) {
         // echo "Tiket berhasil dibeli. Kode tiket Anda: $ticket_code";
         header("Location: index.php?page=sale&tiket=" . $ticket_code);
@@ -48,10 +49,10 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
 // Mengirim email konfirmasi pembelian tiket
-sendEmail($name,$seat, $ticket_code);
+sendEmail($name, $seat, $email, $ticket_code);
 
 // Fungsi untuk mengirim email
-function sendEmail($name, $seat, $ticket_code) {
+function sendEmail($name, $seat, $email, $ticket_code) {
     // Load library PHPMailer
     require '../PHPMailer/PHPMailer/PHPMailer.php';
     require '../PHPMailer/PHPMailer/SMTP.php';
@@ -72,12 +73,13 @@ function sendEmail($name, $seat, $ticket_code) {
     $mail->setFrom($email_pengirim, $nama_pengirim);
 
     // Set penerima email
-    $mail->addAddress('tagar60384@lewenbo.com', $name); // Ganti dengan email pembeli dan namanya
+    // $mail->addAddress('tagar60384@lewenbo.com', $name); // Ganti dengan email pembeli dan namanya
+    $mail->addAddress($email, $name); // Ganti dengan email pembeli dan namanya
 
     // Konten email
     $mail->isHTML(true);
     $mail->Subject = "Konfirmasi Pembelian Tiket $name";
-    $mail->Body    = "Halo $name $seat,<br><br>Terima kasih telah membeli tiket. Berikut adalah kode tiket Anda: $ticket_code. Simpan kode ini dengan baik untuk verifikasi.<br><br>Terima kasih,<br>Your Company";
+    $mail->Body    = "Halo $name $seat $email,<br><br>Terima kasih telah membeli tiket. Berikut adalah kode tiket Anda: $ticket_code. Simpan kode ini dengan baik untuk verifikasi.<br><br>Terima kasih,<br>Your Company";
 
     // Kirim email
     if(!$mail->send()) {
