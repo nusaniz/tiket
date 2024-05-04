@@ -63,7 +63,7 @@ if ($result->num_rows > 0) {
         echo "<td>" . $row["ticket_code"] . "</td>";
         echo "<td>" . $row["name"] . "</td>";
         echo "<td>" . $row["seat"] . "</td>";
-        echo "<td>" . $row["photo"] . "</td>";
+        echo "<td>" . $row["email"] . "</td>";
         // echo "<td>" . $row["email"] . "</td>";
         echo "<td>" . $row["status"] . "</td>";
         echo "<td>" . $row["waktu_validasi"] . "</td>";
