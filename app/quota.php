@@ -7,8 +7,12 @@ if (!isset($_SESSION['username'])) {
 }
 ?>
 
-<!-- <?php require 'kuota.php';?> -->
-<!-- <?php require 'sale.php';?> -->
+<div style="display: none;">
+    <?php
+    require "kuota.php";
+    require "sale.php";
+    ?>
+</div>
 
 <!DOCTYPE html>
 <html lang="en">
