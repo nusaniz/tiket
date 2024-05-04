@@ -68,8 +68,8 @@ if (!isset($_SESSION['username'])) {
                         <th>Kode Tiket</th>
                         <th>Nama</th>
                         <th>Seat</th>
-                        <th>Photo</th>
-                        <!-- <th>Email</th> -->
+                        <!-- <th>Photo</th> -->
+                        <th>Email</th>
                         <th>Status</th>
                         <th>Waktu Validasi</th>
                         <th>Aksi</th>
